@@ -168,6 +168,11 @@
                     style="@style/spinner_style" />
 
             </RelativeLayout>
+            <TextView
+                android:id="@+id/show_result"
+                android:text="Result Here"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
         <Button
             android:id="@+id/go_to_output"

@@ -1,5 +1,7 @@
 package emeraldrating.creditguideapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -28,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements
     String totalAssets;
     String Profit;
     String profitLastPeriod;
+    int countryRiskScore;
+    int industryRiskScore;
 
 
     String[] countryNames = {"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
@@ -118,7 +123,8 @@ public class MainActivity extends AppCompatActivity implements
     String[] rangesIntegerNumbers = {"Negative", "1", "1,000", "10,000", "20,000", "50,000", "1,00,000",
             "2,00,000", "5,00,000", "10,00,000", "20,00,000", "50,00,000", "1,00,00,000"};
 
-    Button output;
+    Button outputButton;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        output = findViewById(R.id.go_to_output);
+        outputButton = findViewById(R.id.go_to_output);
+        builder = new AlertDialog.Builder(this);
 
         /**
          * First Spinner
@@ -228,10 +235,27 @@ public class MainActivity extends AppCompatActivity implements
         spinnerProfitLastPeriod.setAdapter(adapterProfitLastPeriod);
 
 
-        output.setOnClickListener(new View.OnClickListener() {
+        outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CalculateResult();
+                String message=CalculateResult();
+                //Uncomment the below code to Set the message and title from the strings.xml file
+//                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+
+                //Setting message manually and performing action on button click
+                builder.setMessage(message)
+                        .setCancelable(true)
+                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        })
+                ;
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Result");
+                alert.show();
             }
 
         });
@@ -265,11 +289,13 @@ public class MainActivity extends AppCompatActivity implements
         switch (parent.getId()) {
             case R.id.spinner_country:
                 Country = countryNames[position];
+                countryRiskScore = countryRiskScores[position];
 //                Toast.makeText(getApplicationContext(), countryName[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Country = " + countryNames[position]);
                 break;
             case R.id.spinner_industry:
                 Industry = industryNames[position];
+                industryRiskScore = industryRiskScores[position];
 //                Toast.makeText(getApplicationContext(), industryName[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Industry = " + industryNames[position]);
                 break;
@@ -311,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements
         // TODO Auto-generated method stub
     }
 
-    void CalculateResult(){
-        Calculator object=new Calculator( Country,
+    String CalculateResult() {
+        Calculator object = new Calculator(Country,
                 Industry,
                 currentAsset,
                 currentLiabilities,
@@ -320,7 +346,10 @@ public class MainActivity extends AppCompatActivity implements
                 Equity,
                 totalAssets,
                 Profit,
-                profitLastPeriod);
-        String riskClass=object.getRiskClass();
+                profitLastPeriod,
+                countryRiskScore,
+                industryRiskScore);
+        String riskClass = object.getRiskClass();
+        return riskClass;
     }
 }
