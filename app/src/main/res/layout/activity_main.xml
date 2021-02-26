@@ -50,21 +50,158 @@
 
                 <Spinner
                     android:id="@+id/spinner_country"
-                    android:layout_width="180dp"
-                    android:layout_height="32dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true" />
+                    style="@style/spinner_style"/>
             </RelativeLayout>
 
-        </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Industry"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_industry"
+                    style="@style/spinner_style" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Current Assets"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_current_assets"
+                    style="@style/spinner_style" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Current Liabilities"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_current_liabilities"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Inventories"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_inventories"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Equity"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_equity"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Total Assets"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_total_assets"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Profit"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_profit"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Profit Last Period"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_profit_last_period"
+                    style="@style/spinner_style" />
+
+            </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
