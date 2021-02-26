@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements
     String profitLastPeriod;
     int countryRiskScore;
     int industryRiskScore;
+    int Tolerance;
+    int standardPaymentTerm;
 
 
     String[] countryNames = {"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements
             "2,00,000", "5,00,000", "10,00,000", "20,00,000", "50,00,000", "1,00,00,000"};
 
     Button outputButton;
+    TextView showResult;
     AlertDialog.Builder builder;
 
     @Override
@@ -134,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
         outputButton = findViewById(R.id.go_to_output);
+        showResult = findViewById(R.id.show_result);
         builder = new AlertDialog.Builder(this);
 
         /**
@@ -238,24 +243,24 @@ public class MainActivity extends AppCompatActivity implements
         outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message=CalculateResult();
-                //Uncomment the below code to Set the message and title from the strings.xml file
-//                builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
+                String message = CalculateResult();
 
-                //Setting message manually and performing action on button click
-                builder.setMessage(message)
-                        .setCancelable(true)
-                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        })
-                ;
-                //Creating dialog box
-                AlertDialog alert = builder.create();
-                //Setting the title manually
-                alert.setTitle("Result");
-                alert.show();
+
+//                //Setting message manually and performing action on button click
+//                builder.setMessage(message)
+//                        .setCancelable(true)
+//                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        })
+//                ;
+//                //Creating dialog box
+//                AlertDialog alert = builder.create();
+//                //Setting the title manually
+//                alert.setTitle("Result");
+//                alert.show();
+                showResult.setText(message);
             }
 
         });
@@ -289,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements
         switch (parent.getId()) {
             case R.id.spinner_country:
                 Country = countryNames[position];
+                Tolerance = countryTolerances[position];
+                standardPaymentTerm = countryStandardPaymentTerms[position];
                 countryRiskScore = countryRiskScores[position];
 //                Toast.makeText(getApplicationContext(), countryName[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Country = " + countryNames[position]);
@@ -348,8 +355,21 @@ public class MainActivity extends AppCompatActivity implements
                 Profit,
                 profitLastPeriod,
                 countryRiskScore,
-                industryRiskScore);
+                industryRiskScore,
+                Tolerance,
+                standardPaymentTerm);
         String riskClass = object.getRiskClass();
-        return riskClass;
+        String paymentTerms = object.getPaymentTerm();
+        String paymentTermTolerance = object.getPaymentTermTolerance();
+        String maxOrderSize = String.valueOf(object.getMaximumOrderSize());
+        String creditLimit = String.valueOf(object.getCreditLimit());
+        String average = object.getAverage();
+
+        String result = "Risk Class = " + riskClass + "\n" + "Payment Term = "
+                + paymentTerms + "\n" + "Payment Term Tolerance = " +
+                paymentTermTolerance + "\n" + "Maximum Order Size = " + maxOrderSize +
+                "\n" + "Credit Limit = " + creditLimit +
+                "\nAverage Risk Score = " + average;
+        return result;
     }
 }

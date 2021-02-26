@@ -1,7 +1,10 @@
 package emeraldrating.creditguideapp;
 
+import android.util.Log;
+
 public class Calculator {
 
+    private static final String TAG = "MyTag";
     String Country;
     String Industry;
     String currentAsset;
@@ -13,6 +16,10 @@ public class Calculator {
     String profitLastPeriod;
     int countryRiskScore;
     int industryRiskScore;
+    int Tolerance;
+    int standardPaymentTerms;
+
+    double average;
 
     public Calculator(String Country,
                       String Industry,
@@ -24,7 +31,9 @@ public class Calculator {
                       String Profit,
                       String profitLastPeriod,
                       int countryRiskScore,
-                      int industryRiskScore) {
+                      int industryRiskScore,
+                      int Tolerance,
+                      int standardPaymentTerms) {
         this.Country = Country;
         this.Industry = Industry;
         this.currentAsset = currentAsset;
@@ -36,6 +45,8 @@ public class Calculator {
         this.profitLastPeriod = profitLastPeriod;
         this.countryRiskScore = countryRiskScore;
         this.industryRiskScore = industryRiskScore;
+        this.Tolerance=Tolerance;
+        this.standardPaymentTerms=standardPaymentTerms;
     }
 
     public String getRiskClass() {
@@ -139,29 +150,39 @@ public class Calculator {
         }
 
         scoreCountry = countryRiskScore;
-        scoreIndustry=industryRiskScore;
-        int averageRiskScore =
+        scoreIndustry = industryRiskScore;
+        double averageRiskScore =
                 (scoreCurrentRatio +
-                scoreQuickRatio +
-                score_debt_by_total_assets +
-                score_return_on_assets_most_current_period +
-                score_return_on_assets_previous_period +
-                scoreCountry +
-                scoreIndustry)/7;
+                        scoreQuickRatio +
+                        score_debt_by_total_assets +
+                        score_return_on_assets_most_current_period +
+                        score_return_on_assets_previous_period +
+                        scoreCountry +
+                        scoreIndustry) / 7.0;
+        average = averageRiskScore;
+        averageRiskScore=Math.round(averageRiskScore);
+
+        Log.d(TAG, "Current Ratio  = "+currentRatio+"   "+scoreCurrentRatio);
+        Log.d(TAG, "Quick Ratio  = "+quickRatio+"   "+scoreQuickRatio);
+        Log.d(TAG, "Debt / Total Asset  = "+debt_by_total_asset+"   "+score_debt_by_total_assets);
+        Log.d(TAG, "Return on Asset most current period  = "+return_on_assets_most_current_period+"   "+score_return_on_assets_most_current_period);
+        Log.d(TAG, "Return on Asset previous period  = "+return_on_assets_previous_period+"   "+score_return_on_assets_previous_period);
+        Log.d(TAG, "Country  = "+scoreCountry);
+        Log.d(TAG, "Industry  = "+scoreIndustry);
+
+
 
         /**
          * =IF(AVERAGE(C2:C8)>80,"Low",IF(AVERAGE(C2:C8)>50,"Medium","High"))
          */
         String Index;
-        if (averageRiskScore>80){
-            Index="Low";
-        }
-        else {
-            if (averageRiskScore>50){
-                Index="Medium";
-            }
-            else {
-                Index="High";
+        if (averageRiskScore > 80) {
+            Index = "Low";
+        } else {
+            if (averageRiskScore > 50) {
+                Index = "Medium";
+            } else {
+                Index = "High";
             }
         }
 
@@ -173,10 +194,87 @@ public class Calculator {
      * "Secured Payment Terms",
      * IF( D21=0,"Secured Payment Terms",
      * "Shipping Days plus "&VLOOKUP($Input.D13,$Country.A:D,4,0)))
-     * */
-    int getPaymentTerm(){
-        if ()
-        return 0;
+     */
+
+
+    String getPaymentTerm() {
+        String PaymentIs;
+        if (countryRiskScore < 40) {
+            PaymentIs = "Secured Payment Terms";
+        } else {
+            if (getCreditLimit()==0){
+                PaymentIs = "Secured Payment Terms";
+            }
+            else{
+                PaymentIs = "Shipping Days plus "+String.valueOf(standardPaymentTerms);
+            }
+        }
+        return PaymentIs;
+    }
+
+    /**
+     * Credit Limit
+     * =ROUND(IFERROR($Scoring.C9/100*$Input.D23,0),-4)
+     */
+    double getCreditLimit() {
+        double creditLimit;
+        try {
+            creditLimit = (average * convertCurrencyToDecimal(Equity))/100.0;
+        } catch (Exception e) {
+            Log.d(TAG, "getCreditLimit: Exception e = "+e);
+            creditLimit = 0;
+        }
+        Log.d(TAG, "getCreditLimit: before"+creditLimit);
+        creditLimit = (int) (Math.round((creditLimit * 1.0) / 10000.0) * 10000);//round off
+        Log.d(TAG, "getCreditLimit: after"+creditLimit);
+
+        return creditLimit;
+    }
+
+    /**
+     * =MIN(ROUND($Input.D17*0.5*$Scoring.C9/100,-4)
+     * ,ROUND(IFERROR($Scoring.C9/100*$Input.D23,0),-4))
+     */
+    int getMaximumOrderSize() {
+        double tempA = (convertCurrencyToDecimal(currentAsset) * 0.5 * average) / 100.0;
+        tempA = (Math.round((tempA * 1.0) / 10000.0) * 10000);
+
+        double tempB;
+        try {
+            tempB = average / 100.0 * convertCurrencyToDecimal(Equity);
+            tempB = (Math.round((tempB * 1.0) / 10000.0) * 10000);
+        } catch (Exception e) {
+            tempB = 0;
+        }
+
+        return (int) Math.min(tempA, tempB);
+    }
+
+    /**
+     * =IF(
+     * VLOOKUP($Input.D13,$Country.A:C,3,0)<40,"",
+     * IF(D21=0,0,
+     * VLOOKUP($Input.D13,$Country.A:E,5,0)))
+     **/
+    String getPaymentTermTolerance() {
+        String paymentTermTolerance;
+        if (countryRiskScore<40){
+            paymentTermTolerance="";
+        }
+        else{
+            if (getCreditLimit()==0){
+                paymentTermTolerance="0";
+            }
+            else{
+                paymentTermTolerance=String.valueOf(Tolerance);
+            }
+        }
+
+        return paymentTermTolerance;
+    }
+
+    String getAverage(){
+        return String.valueOf(average);
     }
 
     double convertCurrencyToDecimal(String currency) {
