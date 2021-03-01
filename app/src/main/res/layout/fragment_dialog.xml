@@ -59,6 +59,7 @@
             <TextView
                 android:id="@+id/text_view_2"
                 style="@style/dialog_text_right_style"
+                android:textSize="14sp"
 
                 />
         </RelativeLayout>
@@ -104,7 +105,8 @@
         android:id="@+id/okay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="Okay"
+        android:textAllCaps="false"
         android:background="@drawable/dialog_button_background"
         />
 

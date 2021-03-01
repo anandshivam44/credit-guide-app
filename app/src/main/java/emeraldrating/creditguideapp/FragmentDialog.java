@@ -87,7 +87,7 @@ public class FragmentDialog extends DialogFragment {
         else if (riskClass=="Medium"){
             textView1.setTextColor(Color.parseColor("#d35400"));
         }
-        else if (riskClass=="Migh"){
+        else if (riskClass=="High"){
             textView1.setTextColor(Color.RED);
         }
 

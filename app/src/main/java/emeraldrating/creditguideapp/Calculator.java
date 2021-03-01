@@ -161,6 +161,7 @@ public class Calculator {
                         scoreIndustry) / 7.0;
         average = averageRiskScore;
         averageRiskScore=Math.round(averageRiskScore);
+        Log.d(TAG, "Average = "+averageRiskScore+" or "+average);
 
         Log.d(TAG, "Current Ratio  = "+currentRatio+"   "+scoreCurrentRatio);
         Log.d(TAG, "Quick Ratio  = "+quickRatio+"   "+scoreQuickRatio);

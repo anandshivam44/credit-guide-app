@@ -2,9 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="emeraldrating.creditguideapp.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_privacy_policy"
+        android:title="Privacy Policy"
+        app:showAsAction="never"
+        android:icon="@drawable/logo_small"
+        />
+
+    <item
+        android:id="@+id/action_touch"
+        android:title="Contact Us"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/action_about"
+        app:showAsAction="never"
+        />
+
 </menu>
