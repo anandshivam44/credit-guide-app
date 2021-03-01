@@ -2,6 +2,7 @@ package emeraldrating.creditguideapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements
 
         outputButton = findViewById(R.id.go_to_output);
         showResult = findViewById(R.id.show_result);
+        SharedPreferences sh = getSharedPreferences("Spinner Items", MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);
 
         /**
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements
         adapterCountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spinnerCountry.setAdapter(adapterCountry);
+        spinnerCountry.setSelection(sh.getInt("Country",208),true);//208 is index no for Switzerland
 
         /**
          * Second Spinner
@@ -164,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterIndustry = new ArrayAdapter(this, android.R.layout.simple_spinner_item, industryNames);
         adapterIndustry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerIndustry.setAdapter(adapterIndustry);
+        spinnerIndustry.setSelection(sh.getInt("Industry",3));
 
         /**
          * Third Spinner
@@ -174,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterCurrentAssets = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterCurrentAssets.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrentAssets.setAdapter(adapterCurrentAssets);
+        spinnerCurrentAssets.setSelection(sh.getInt("Current Assets",3));
 
         /**
          * Fourth Spinner
@@ -184,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterCurrentLiabilities = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterCurrentLiabilities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrentLiabilities.setAdapter(adapterCurrentLiabilities);
+        spinnerCurrentLiabilities.setSelection(sh.getInt("Current Liabilities",3));
 
 
         /**
@@ -195,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterInventories = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterInventories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInventories.setAdapter(adapterInventories);
+        spinnerInventories.setSelection(sh.getInt("Inventories",3));
 
 
         /**
@@ -206,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterEquity = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterEquity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEquity.setAdapter(adapterEquity);
+        spinnerEquity.setSelection(sh.getInt("Equity",3));
 
 
         /**
@@ -217,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterTotalAssets = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterTotalAssets.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTotalAssets.setAdapter(adapterTotalAssets);
+        spinnerTotalAssets.setSelection(sh.getInt("Total Assets",3));
 
 
         /**
@@ -228,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterProfit = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterProfit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfit.setAdapter(adapterProfit);
+        spinnerProfit.setSelection(sh.getInt("Profit",3));
 
         /**
          * Ninth Spinner
@@ -238,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterProfitLastPeriod = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterProfitLastPeriod.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfitLastPeriod.setAdapter(adapterProfitLastPeriod);
+        spinnerProfitLastPeriod.setSelection(sh.getInt("Profit Last Period",3));
 
 
         outputButton.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +302,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Spinner Items", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+        // write all the data entered by the user in SharedPreference and apply
+//        myEdit.putString("name", name.getText().toString());
+
+
+
         switch (parent.getId()) {
             case R.id.spinner_country:
                 Country = countryNames[position];
@@ -299,43 +319,56 @@ public class MainActivity extends AppCompatActivity implements
                 countryRiskScore = countryRiskScores[position];
 //                Toast.makeText(getApplicationContext(), countryName[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Country = " + countryNames[position]);
+
+                myEdit.putInt("Country", position);
+
                 break;
             case R.id.spinner_industry:
                 Industry = industryNames[position];
                 industryRiskScore = industryRiskScores[position];
 //                Toast.makeText(getApplicationContext(), industryName[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Industry = " + industryNames[position]);
+                myEdit.putInt("Industry", position);
                 break;
             case R.id.spinner_current_assets:
                 currentAsset = rangesNaturalNumbers[position];
 //                Toast.makeText(getApplicationContext(), rangesNaturalNumbers[position], Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onItemSelected: Current Assets = " + rangesNaturalNumbers[position]);
+                myEdit.putInt("Current Assets", position);
                 break;
             case R.id.spinner_current_liabilities:
                 currentLiabilities = rangesNaturalNumbers[position];
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
+                myEdit.putInt("Current Liabilities", position);
                 break;
             case R.id.spinner_inventories:
                 Inventories = rangesNaturalNumbers[position];
+                myEdit.putInt("Inventories", position);
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
                 break;
             case R.id.spinner_equity:
                 Equity = rangesIntegerNumbers[position];
+                myEdit.putInt("Equity", position);
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
                 break;
             case R.id.spinner_total_assets:
                 totalAssets = rangesNaturalNumbers[position];
+                myEdit.putInt("Total Assets", position);
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
                 break;
             case R.id.spinner_profit:
                 Profit = rangesIntegerNumbers[position];
+                myEdit.putInt("Profit", position);
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
                 break;
             case R.id.spinner_profit_last_period:
                 profitLastPeriod = rangesIntegerNumbers[position];
+                myEdit.putInt("Profit Last Period", position);
 //                Log.d(TAG, "onItemSelected: Current Liabilities = " + rangesNaturalNumbers[position]);
                 break;
         }
+
+        myEdit.apply();//Apply Shared Prefs
 
     }
 
