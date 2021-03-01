@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.View;
@@ -128,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements
             "2,00,000", "5,00,000", "10,00,000", "20,00,000", "50,00,000", "1,00,00,000"};
 
     Button outputButton;
-    TextView showResult;
     AlertDialog.Builder builder;
 
     @Override
@@ -139,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements
         setSupportActionBar(toolbar);
 
         outputButton = findViewById(R.id.go_to_output);
-        showResult = findViewById(R.id.show_result);
         SharedPreferences sh = getSharedPreferences("Spinner Items", MODE_PRIVATE);
         builder = new AlertDialog.Builder(this);
 
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements
         adapterCountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spinnerCountry.setAdapter(adapterCountry);
-        spinnerCountry.setSelection(sh.getInt("Country",208),true);//208 is index no for Switzerland
+        spinnerCountry.setSelection(sh.getInt("Country", 208), true);//208 is index no for Switzerland
 
         /**
          * Second Spinner
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterIndustry = new ArrayAdapter(this, android.R.layout.simple_spinner_item, industryNames);
         adapterIndustry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerIndustry.setAdapter(adapterIndustry);
-        spinnerIndustry.setSelection(sh.getInt("Industry",3));
+        spinnerIndustry.setSelection(sh.getInt("Industry", 3));
 
         /**
          * Third Spinner
@@ -178,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterCurrentAssets = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterCurrentAssets.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrentAssets.setAdapter(adapterCurrentAssets);
-        spinnerCurrentAssets.setSelection(sh.getInt("Current Assets",3));
+        spinnerCurrentAssets.setSelection(sh.getInt("Current Assets", 3));
 
         /**
          * Fourth Spinner
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterCurrentLiabilities = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterCurrentLiabilities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrentLiabilities.setAdapter(adapterCurrentLiabilities);
-        spinnerCurrentLiabilities.setSelection(sh.getInt("Current Liabilities",3));
+        spinnerCurrentLiabilities.setSelection(sh.getInt("Current Liabilities", 3));
 
 
         /**
@@ -201,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterInventories = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterInventories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerInventories.setAdapter(adapterInventories);
-        spinnerInventories.setSelection(sh.getInt("Inventories",3));
+        spinnerInventories.setSelection(sh.getInt("Inventories", 3));
 
 
         /**
@@ -213,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterEquity = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterEquity.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEquity.setAdapter(adapterEquity);
-        spinnerEquity.setSelection(sh.getInt("Equity",3));
+        spinnerEquity.setSelection(sh.getInt("Equity", 3));
 
 
         /**
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterTotalAssets = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesNaturalNumbers);
         adapterTotalAssets.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTotalAssets.setAdapter(adapterTotalAssets);
-        spinnerTotalAssets.setSelection(sh.getInt("Total Assets",3));
+        spinnerTotalAssets.setSelection(sh.getInt("Total Assets", 3));
 
 
         /**
@@ -237,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterProfit = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterProfit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfit.setAdapter(adapterProfit);
-        spinnerProfit.setSelection(sh.getInt("Profit",3));
+        spinnerProfit.setSelection(sh.getInt("Profit", 3));
 
         /**
          * Ninth Spinner
@@ -248,30 +247,13 @@ public class MainActivity extends AppCompatActivity implements
         ArrayAdapter adapterProfitLastPeriod = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rangesIntegerNumbers);
         adapterProfitLastPeriod.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProfitLastPeriod.setAdapter(adapterProfitLastPeriod);
-        spinnerProfitLastPeriod.setSelection(sh.getInt("Profit Last Period",3));
+        spinnerProfitLastPeriod.setSelection(sh.getInt("Profit Last Period", 3));
 
 
         outputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = CalculateResult();
-
-
-//                //Setting message manually and performing action on button click
-//                builder.setMessage(message)
-//                        .setCancelable(true)
-//                        .setPositiveButton("Back", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                dialog.cancel();
-//                            }
-//                        })
-//                ;
-//                //Creating dialog box
-//                AlertDialog alert = builder.create();
-//                //Setting the title manually
-//                alert.setTitle("Result");
-//                alert.show();
-                showResult.setText(message);
+                CalculateResult();
             }
 
         });
@@ -308,7 +290,6 @@ public class MainActivity extends AppCompatActivity implements
 
         // write all the data entered by the user in SharedPreference and apply
 //        myEdit.putString("name", name.getText().toString());
-
 
 
         switch (parent.getId()) {
@@ -377,7 +358,7 @@ public class MainActivity extends AppCompatActivity implements
         // TODO Auto-generated method stub
     }
 
-    String CalculateResult() {
+    void CalculateResult() {
         Calculator object = new Calculator(Country,
                 Industry,
                 currentAsset,
@@ -398,11 +379,36 @@ public class MainActivity extends AppCompatActivity implements
         String creditLimit = String.valueOf(object.getCreditLimit());
         String average = object.getAverage();
 
-        String result = "Risk Class = " + riskClass + "\n" + "Payment Term = "
-                + paymentTerms + "\n" + "Payment Term Tolerance = " +
-                paymentTermTolerance + "\n" + "Maximum Order Size = " + maxOrderSize +
-                "\n" + "Credit Limit = " + creditLimit +
-                "\nAverage Risk Score = " + average;
-        return result;
+//        String result = "Risk Class = " + riskClass + "\n" + "Payment Term = "
+//                + paymentTerms + "\n" + "Payment Term Tolerance = " +
+//                paymentTermTolerance + "\n" + "Maximum Order Size = " + maxOrderSize +
+//                "\n" + "Credit Limit = " + creditLimit +
+//                "\nAverage Risk Score = " + average;
+
+        showDialog(riskClass,
+                paymentTerms,
+                paymentTermTolerance,
+                maxOrderSize,
+                creditLimit,
+                average);
     }
+
+    private void showDialog(String riskClass,
+                            String paymentTerms,
+                            String paymentTermTolerance,
+                            String maxOrderSize,
+                            String creditLimit,
+                            String average) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentDialog editNameDialogFragment = FragmentDialog.newInstance(
+                "Result",
+                riskClass,
+                paymentTerms,
+                paymentTermTolerance,
+                maxOrderSize,
+                creditLimit,
+                average);
+        editNameDialogFragment.show(fm, "fragment_dialog");
+    }
+
 }

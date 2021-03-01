@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
@@ -24,168 +25,199 @@
                 app:popupTheme="@style/Theme.CreditGuideApp.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/app_bar"
+            android:src="@drawable/logo_banner"
+            android:background="#0B2A20"
+            android:layout_margin="8dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/app_bar"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_below="@+id/banner"
+            android:layout_above="@+id/go_to_output"
+            >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Input\nof business partner information\nselect closest" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_country"
-                    android:text="Country"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Input\nof business partner information\nselect closest" />
 
-                <Spinner
-                    android:id="@+id/spinner_country"
-                    style="@style/spinner_style"/>
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_country"
+                        android:text="Country" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:text="Industry"
-                    android:layout_alignBottom="@+id/spinner_industry"/>
+                    <Spinner
+                        android:id="@+id/spinner_country"
+                        style="@style/spinner_style" />
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_industry"
-                    style="@style/spinner_style" />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_industry"
+                        android:text="Industry" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_current_assets"
-                    android:text="Current Assets"/>
+                    <Spinner
+                        android:id="@+id/spinner_industry"
+                        style="@style/spinner_style" />
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_current_assets"
-                    style="@style/spinner_style" />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_current_assets"
+                        android:text="Current Assets" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_current_liabilities"
-                    android:text="Current Liabilities"/>
+                    <Spinner
+                        android:id="@+id/spinner_current_assets"
+                        style="@style/spinner_style" />
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_current_liabilities"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_current_liabilities"
+                        android:text="Current Liabilities" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinner_current_liabilities"
+                        style="@style/spinner_style" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_inventories"
-                    android:text="Inventories"/>
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_inventories"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_inventories"
+                        android:text="Inventories" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinner_inventories"
+                        style="@style/spinner_style" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_equity"
-                    android:text="Equity"/>
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_equity"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_equity"
+                        android:text="Equity" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinner_equity"
+                        style="@style/spinner_style" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_width="wrap_content"
-                    android:layout_alignBottom="@+id/spinner_total_assets"
-                    android:text="Total Assets"/>
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_total_assets"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_width="wrap_content"
+                        android:layout_alignBottom="@+id/spinner_total_assets"
+                        android:text="Total Assets" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinner_total_assets"
+                        style="@style/spinner_style" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_profit"
-                    android:text="Profit"/>
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_profit"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_profit"
+                        android:text="Profit" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <Spinner
+                        android:id="@+id/spinner_profit"
+                        style="@style/spinner_style" />
 
-                <TextView
-                    style="@style/text_style"
-                    android:layout_alignBottom="@+id/spinner_profit_last_period"
-                    android:text="Profit Last Period"/>
+                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner_profit_last_period"
-                    style="@style/spinner_style" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-            </RelativeLayout>
-            <TextView
-                android:layout_marginLeft="64dp"
-                android:id="@+id/show_result"
-                android:text="Result Here"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                    <TextView
+                        style="@style/text_style"
+                        android:layout_alignBottom="@+id/spinner_profit_last_period"
+                        android:text="Profit Last Period" />
+
+                    <Spinner
+                        android:id="@+id/spinner_profit_last_period"
+                        style="@style/spinner_style" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
         </LinearLayout>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1">-->
+
+<!--            -->
+
+<!--        </LinearLayout>-->
         <Button
             android:id="@+id/go_to_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginHorizontal="32dp"
             android:layout_marginVertical="16dp"
-            android:text="Go to Output"
+            android:background="@drawable/button_background"
+            android:text="Evaluate"
             android:textAllCaps="false"
-            android:textSize="16sp"
-            android:background="#535c68"
+            android:textSize="24sp"
+            android:layout_marginHorizontal="16sp"
+            android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
 
