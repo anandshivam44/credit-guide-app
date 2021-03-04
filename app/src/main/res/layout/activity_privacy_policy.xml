@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUs">
+    tools:context=".PrivacyPolicy">
+
     <WebView
-        android:id="@+id/webview_about_us"
+        android:id="@+id/webview_privacy_policy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

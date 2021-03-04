@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
@@ -136,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// completely remove night mode
 
         outputButton = findViewById(R.id.go_to_output);
         SharedPreferences sh = getSharedPreferences("Spinner Items", MODE_PRIVATE);
@@ -277,6 +280,21 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.action_about) {
             Intent myIntent = new Intent(this, AboutUs.class);
             startActivity(myIntent);
+            return true;
+        }
+        else if (id == R.id.action_privacy_policy){
+            Intent myIntent = new Intent(this, PrivacyPolicy.class);
+            startActivity(myIntent); // https://emeraldrating.com/privacy-statement/
+            return true;
+        }
+        else if (id == R.id.contact_us){
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@emeraldrating.com"});
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject: I loved your App");
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
             return true;
         }
 
