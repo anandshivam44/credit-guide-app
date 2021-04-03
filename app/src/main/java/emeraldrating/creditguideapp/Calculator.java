@@ -200,6 +200,7 @@ public class Calculator {
 
     String getPaymentTerm() {
         String PaymentIs;
+//        if (countryRiskScore < 40 && getCreditLimit()==0) {
         if (countryRiskScore < 40) {
             PaymentIs = "Secured Payment Terms";
         } else {

@@ -124,10 +124,10 @@ public class MainActivity extends AppCompatActivity implements
             "Pharmaceuticals", "Retail", "Textile", "Transportation"};
     int[] industryRiskScores = {70, 70, 70, 70, 40, 50, 50, 50, 40, 40, 40, 70, 50, 40, 50};
 
-    String[] rangesNaturalNumbers = {"1", "1,000", "10,000", "20,000", "50,000", "1,00,000", "2,00,000",
-            "5,00,000", "10,00,000", "20,00,000", "50,00,000", "1,00,00,000"};
-    String[] rangesIntegerNumbers = {"Negative", "1", "1,000", "10,000", "20,000", "50,000", "1,00,000",
-            "2,00,000", "5,00,000", "10,00,000", "20,00,000", "50,00,000", "1,00,00,000"};
+    String[] rangesNaturalNumbers = {"1", "1,000", "10,000", "20,000", "50,000", "100,000", "200,000",
+            "500,000", "1,000,000", "2,000,000", "5,000,000", "10,000,000"};
+    String[] rangesIntegerNumbers = {"Negative", "1", "1,000", "10,000", "20,000", "50,000", "100,000",
+            "200,000", "500,000", "1,000,000", "2,000,000", "5,000,000", "10,000,000"};
 
     Button outputButton;
     AlertDialog.Builder builder;
@@ -395,14 +395,8 @@ public class MainActivity extends AppCompatActivity implements
         String paymentTerms = object.getPaymentTerm();
         String paymentTermTolerance = object.getPaymentTermTolerance();
         String maxOrderSize = String.valueOf(object.getMaximumOrderSize());
-        String creditLimit = String.valueOf(object.getCreditLimit());
+        String creditLimit = String.valueOf(((int)object.getCreditLimit()));
         String average = object.getAverage();
-
-//        String result = "Risk Class = " + riskClass + "\n" + "Payment Term = "
-//                + paymentTerms + "\n" + "Payment Term Tolerance = " +
-//                paymentTermTolerance + "\n" + "Maximum Order Size = " + maxOrderSize +
-//                "\n" + "Credit Limit = " + creditLimit +
-//                "\nAverage Risk Score = " + average;
 
         showDialog(riskClass,
                 paymentTerms,

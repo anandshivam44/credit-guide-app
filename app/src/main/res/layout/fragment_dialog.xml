@@ -39,6 +39,7 @@
         <RelativeLayout
             style="@style/relative_layout_style">
             <TextView
+
                 style="@style/dialog_text_left_style"
                 android:text="Risk Class"
                 />
@@ -52,14 +53,18 @@
         <RelativeLayout
             style="@style/relative_layout_style">
             <TextView
+                android:id="@+id/ll_1"
                 android:text="Payment Term"
                 style="@style/dialog_text_left_style"
+
 
                 />
             <TextView
                 android:id="@+id/text_view_2"
                 style="@style/dialog_text_right_style"
                 android:textSize="14sp"
+                android:layout_toRightOf="@id/ll_1"
+                android:gravity="right"
 
                 />
         </RelativeLayout>

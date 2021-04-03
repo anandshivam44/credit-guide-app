@@ -71,8 +71,11 @@ public class FragmentDialog extends DialogFragment {
         String paymentTerms=getArguments().getString("paymentTerms","Something went wrong");
         String paymentTermTolerance=getArguments().getString("paymentTermTolerance","Something went wrong");
         String maxOrderSize=getArguments().getString("maxOrderSize","Something went wrong");
+        maxOrderSize=addCommas(maxOrderSize);
+
         String creditLimit=getArguments().getString("creditLimit","Something went wrong");
-        String average=getArguments().getString("average","Something went wrong");
+        creditLimit=addCommas(creditLimit);
+//        String average=getArguments().getString("average","Something went wrong");
 
         TextView textView1 =  view.findViewById(R.id.text_view_1);
         TextView textView2 =  view.findViewById(R.id.text_view_2);
@@ -97,6 +100,22 @@ public class FragmentDialog extends DialogFragment {
         textView5.setText(creditLimit);
 
 
+    }
+
+    private String addCommas(String number) {
+        int l=number.length();
+        String response="";
+        int counter=0;
+        for (int i=l-1;i>=0;i--){
+            counter++;
+            response=number.charAt(i)+response;
+            if (counter==3 && i!=0){
+                response=","+response;
+                counter=0;
+            }
+
+        }
+        return response;
     }
 
 }
