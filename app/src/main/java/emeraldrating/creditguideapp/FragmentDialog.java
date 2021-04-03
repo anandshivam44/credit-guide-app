@@ -94,6 +94,11 @@ public class FragmentDialog extends DialogFragment {
             textView1.setTextColor(Color.RED);
         }
 
+        if (paymentTerms == "Secured Payment Terms"){// Exception Handling
+            //TODO This is Exception Handling This should not be here It should be in Calculator Class
+            creditLimit="0";
+        }
+
         textView2.setText(paymentTerms);
         textView3.setText(paymentTermTolerance);
         textView4.setText(maxOrderSize);
