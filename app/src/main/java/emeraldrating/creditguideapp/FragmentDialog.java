@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,12 +29,12 @@ public class FragmentDialog extends DialogFragment {
         FragmentDialog frag = new FragmentDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
-        args.putString("riskClass",riskClass);
-        args.putString("paymentTerms",paymentTerms);
-        args.putString("paymentTermTolerance",paymentTermTolerance);
-        args.putString("maxOrderSize",maxOrderSize);
-        args.putString("creditLimit",creditLimit);
-        args.putString("average",average);
+        args.putString("riskClass", riskClass);
+        args.putString("paymentTerms", paymentTerms);
+        args.putString("paymentTermTolerance", paymentTermTolerance);
+        args.putString("maxOrderSize", maxOrderSize);
+        args.putString("creditLimit", creditLimit);
+        args.putString("average", average);
         frag.setArguments(args);
         return frag;
     }
@@ -55,7 +53,7 @@ public class FragmentDialog extends DialogFragment {
         // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
         getDialog().setTitle(title);
-        Button Okay=view.findViewById(R.id.okay);
+        Button Okay = view.findViewById(R.id.okay);
         Okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,36 +65,34 @@ public class FragmentDialog extends DialogFragment {
 //        getDialog().getWindow().setSoftInputMode(
 //                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        String riskClass=getArguments().getString("riskClass","Something went wrong");
-        String paymentTerms=getArguments().getString("paymentTerms","Something went wrong");
-        String paymentTermTolerance=getArguments().getString("paymentTermTolerance","Something went wrong");
-        String maxOrderSize=getArguments().getString("maxOrderSize","Something went wrong");
-        maxOrderSize=addCommas(maxOrderSize);
+        String riskClass = getArguments().getString("riskClass", "Something went wrong");
+        String paymentTerms = getArguments().getString("paymentTerms", "Something went wrong");
+        String paymentTermTolerance = getArguments().getString("paymentTermTolerance", "Something went wrong");
+        String maxOrderSize = getArguments().getString("maxOrderSize", "Something went wrong");
+        maxOrderSize = addCommas(maxOrderSize);
 
-        String creditLimit=getArguments().getString("creditLimit","Something went wrong");
-        creditLimit=addCommas(creditLimit);
+        String creditLimit = getArguments().getString("creditLimit", "Something went wrong");
+        creditLimit = addCommas(creditLimit);
 //        String average=getArguments().getString("average","Something went wrong");
 
-        TextView textView1 =  view.findViewById(R.id.text_view_1);
-        TextView textView2 =  view.findViewById(R.id.text_view_2);
-        TextView textView3 =  view.findViewById(R.id.text_view_3);
-        TextView textView4 =  view.findViewById(R.id.text_view_4);
-        TextView textView5 =  view.findViewById(R.id.text_view_5);
+        TextView textView1 = view.findViewById(R.id.text_view_1);
+        TextView textView2 = view.findViewById(R.id.text_view_2);
+        TextView textView3 = view.findViewById(R.id.text_view_3);
+        TextView textView4 = view.findViewById(R.id.text_view_4);
+        TextView textView5 = view.findViewById(R.id.text_view_5);
 
         textView1.setText(riskClass);
-        if (riskClass=="Low"){
+        if (riskClass == "Low") {
             textView1.setTextColor(Color.GREEN);
-        }
-        else if (riskClass=="Medium"){
+        } else if (riskClass == "Medium") {
             textView1.setTextColor(Color.parseColor("#d35400"));
-        }
-        else if (riskClass=="High"){
+        } else if (riskClass == "High") {
             textView1.setTextColor(Color.RED);
         }
 
-        if (paymentTerms == "Secured Payment Terms"){// Exception Handling
+        if (paymentTerms == "Secured Payment Terms") {// Exception Handling
             //TODO This is Exception Handling This should not be here It should be in Calculator Class
-            creditLimit="0";
+            creditLimit = "0";
         }
 
         textView2.setText(paymentTerms);
@@ -108,15 +104,15 @@ public class FragmentDialog extends DialogFragment {
     }
 
     private String addCommas(String number) {
-        int l=number.length();
-        String response="";
-        int counter=0;
-        for (int i=l-1;i>=0;i--){
+        int l = number.length();
+        String response = "";
+        int counter = 0;
+        for (int i = l - 1; i >= 0; i--) {
             counter++;
-            response=number.charAt(i)+response;
-            if (counter==3 && i!=0){
-                response=","+response;
-                counter=0;
+            response = number.charAt(i) + response;
+            if (counter == 3 && i != 0) {
+                response = "," + response;
+                counter = 0;
             }
 
         }

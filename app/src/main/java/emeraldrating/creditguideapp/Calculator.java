@@ -45,8 +45,18 @@ public class Calculator {
         this.profitLastPeriod = profitLastPeriod;
         this.countryRiskScore = countryRiskScore;
         this.industryRiskScore = industryRiskScore;
-        this.Tolerance=Tolerance;
-        this.standardPaymentTerms=standardPaymentTerms;
+        this.Tolerance = Tolerance;
+        this.standardPaymentTerms = standardPaymentTerms;
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0)
+            throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
     public String getRiskClass() {
@@ -160,17 +170,16 @@ public class Calculator {
                         scoreCountry +
                         scoreIndustry) / 7.0;
         average = averageRiskScore;
-        averageRiskScore=Math.round(averageRiskScore);
-        Log.d(TAG, "Average = "+averageRiskScore+" or "+average);
+        averageRiskScore = Math.round(averageRiskScore);
+        Log.d(TAG, "Average = " + averageRiskScore + " or " + average);
 
-        Log.d(TAG, "Current Ratio  = "+currentRatio+"   "+scoreCurrentRatio);
-        Log.d(TAG, "Quick Ratio  = "+quickRatio+"   "+scoreQuickRatio);
-        Log.d(TAG, "Debt / Total Asset  = "+debt_by_total_asset+"   "+score_debt_by_total_assets);
-        Log.d(TAG, "Return on Asset most current period  = "+return_on_assets_most_current_period+"   "+score_return_on_assets_most_current_period);
-        Log.d(TAG, "Return on Asset previous period  = "+return_on_assets_previous_period+"   "+score_return_on_assets_previous_period);
-        Log.d(TAG, "Country  = "+scoreCountry);
-        Log.d(TAG, "Industry  = "+scoreIndustry);
-
+        Log.d(TAG, "Current Ratio  = " + currentRatio + "   " + scoreCurrentRatio);
+        Log.d(TAG, "Quick Ratio  = " + quickRatio + "   " + scoreQuickRatio);
+        Log.d(TAG, "Debt / Total Asset  = " + debt_by_total_asset + "   " + score_debt_by_total_assets);
+        Log.d(TAG, "Return on Asset most current period  = " + return_on_assets_most_current_period + "   " + score_return_on_assets_most_current_period);
+        Log.d(TAG, "Return on Asset previous period  = " + return_on_assets_previous_period + "   " + score_return_on_assets_previous_period);
+        Log.d(TAG, "Country  = " + scoreCountry);
+        Log.d(TAG, "Industry  = " + scoreIndustry);
 
 
         /**
@@ -204,11 +213,10 @@ public class Calculator {
         if (countryRiskScore < 40) {
             PaymentIs = "Secured Payment Terms";
         } else {
-            if (getCreditLimit()==0){
+            if (getCreditLimit() == 0) {
                 PaymentIs = "Secured Payment Terms";
-            }
-            else{
-                PaymentIs = "Shipping Days plus "+String.valueOf(standardPaymentTerms);
+            } else {
+                PaymentIs = "Shipping Days plus " + String.valueOf(standardPaymentTerms);
             }
         }
         return PaymentIs;
@@ -221,14 +229,14 @@ public class Calculator {
     double getCreditLimit() {
         double creditLimit;
         try {
-            creditLimit = (average * convertCurrencyToDecimal(Equity))/100.0;
+            creditLimit = (average * convertCurrencyToDecimal(Equity)) / 100.0;
         } catch (Exception e) {
-            Log.d(TAG, "getCreditLimit: Exception e = "+e);
+            Log.d(TAG, "getCreditLimit: Exception e = " + e);
             creditLimit = 0;
         }
-        Log.d(TAG, "getCreditLimit: before"+creditLimit);
+        Log.d(TAG, "getCreditLimit: before" + creditLimit);
         creditLimit = (int) (Math.round((creditLimit * 1.0) / 10000.0) * 10000);//round off
-        Log.d(TAG, "getCreditLimit: after"+creditLimit);
+        Log.d(TAG, "getCreditLimit: after" + creditLimit);
 
         return creditLimit;
     }
@@ -260,22 +268,20 @@ public class Calculator {
      **/
     String getPaymentTermTolerance() {
         String paymentTermTolerance;
-        if (countryRiskScore<40){
-            paymentTermTolerance="";
-        }
-        else{
-            if (getCreditLimit()==0){
-                paymentTermTolerance="0";
-            }
-            else{
-                paymentTermTolerance=String.valueOf(Tolerance);
+        if (countryRiskScore < 40) {
+            paymentTermTolerance = "";
+        } else {
+            if (getCreditLimit() == 0) {
+                paymentTermTolerance = "0";
+            } else {
+                paymentTermTolerance = String.valueOf(Tolerance);
             }
         }
 
         return paymentTermTolerance;
     }
 
-    String getAverage(){
+    String getAverage() {
         return String.valueOf(average);
     }
 
@@ -283,15 +289,5 @@ public class Calculator {
         String num = currency.replace(",", "");
         double Decimal = Double.valueOf(num);
         return Decimal;
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0)
-            throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
     }
 }

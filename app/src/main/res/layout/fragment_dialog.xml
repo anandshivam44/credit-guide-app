@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:id="@+id/dialog_result"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_gravity="center">
-    
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/header_background"
-        >
+        android:background="@drawable/header_background">
+
         <ImageView
             android:id="@+id/image"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/logo_small"
-            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
             android:padding="3dp"
-            />
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_small" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Result"
             android:layout_centerInParent="true"
+            android:text="Result"
+            android:textColor="@color/black"
             android:textSize="26sp"
 
             />
@@ -34,15 +36,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <RelativeLayout
-            style="@style/relative_layout_style">
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/relative_layout_style">
+
             <TextView
 
                 style="@style/dialog_text_left_style"
-                android:text="Risk Class"
-                />
+                android:text="Risk Class" />
+
             <TextView
                 android:id="@+id/text_view_1"
                 style="@style/dialog_text_right_style"
@@ -50,54 +52,58 @@
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            style="@style/relative_layout_style">
+        <RelativeLayout style="@style/relative_layout_style">
+
             <TextView
                 android:id="@+id/ll_1"
-                android:text="Payment Term"
                 style="@style/dialog_text_left_style"
+                android:text="Payment Term"
 
 
                 />
+
             <TextView
                 android:id="@+id/text_view_2"
                 style="@style/dialog_text_right_style"
-                android:textSize="14sp"
                 android:layout_toRightOf="@id/ll_1"
                 android:gravity="right"
+                android:textSize="14sp"
 
                 />
         </RelativeLayout>
-        <RelativeLayout
-            style="@style/relative_layout_style">
+
+        <RelativeLayout style="@style/relative_layout_style">
+
             <TextView
-                android:text="Payment Term Tolerance"
                 style="@style/dialog_text_left_style"
-                />
+                android:text="Payment Term Tolerance" />
+
             <TextView
                 android:id="@+id/text_view_3"
-                style="@style/dialog_text_right_style"
-                />
+                style="@style/dialog_text_right_style" />
         </RelativeLayout>
-        <RelativeLayout
-            style="@style/relative_layout_style">
+
+        <RelativeLayout style="@style/relative_layout_style">
+
             <TextView
-                android:text="Maximum Order Size"
                 style="@style/dialog_text_left_style"
+                android:text="Maximum Order Size"
 
                 />
+
             <TextView
                 android:id="@+id/text_view_4"
-                style="@style/dialog_text_right_style"
-                />
+                style="@style/dialog_text_right_style" />
         </RelativeLayout>
-        <RelativeLayout
-            style="@style/relative_layout_style">
+
+        <RelativeLayout style="@style/relative_layout_style">
+
             <TextView
-                android:text="Credit Limit"
                 style="@style/dialog_text_left_style"
+                android:text="Credit Limit"
 
                 />
+
             <TextView
                 android:id="@+id/text_view_5"
                 style="@style/dialog_text_right_style"
@@ -110,9 +116,8 @@
         android:id="@+id/okay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Okay"
-        android:textAllCaps="false"
         android:background="@drawable/dialog_button_background"
-        />
+        android:text="Okay"
+        android:textAllCaps="false" />
 
 </LinearLayout>

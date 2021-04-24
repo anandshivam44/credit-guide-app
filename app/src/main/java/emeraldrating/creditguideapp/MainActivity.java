@@ -1,26 +1,23 @@
 package emeraldrating.creditguideapp;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-
-import android.util.Log;
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -281,13 +278,11 @@ public class MainActivity extends AppCompatActivity implements
             Intent myIntent = new Intent(this, AboutUs.class);
             startActivity(myIntent);
             return true;
-        }
-        else if (id == R.id.action_privacy_policy){
+        } else if (id == R.id.action_privacy_policy) {
             Intent myIntent = new Intent(this, PrivacyPolicy.class);
             startActivity(myIntent); // https://emeraldrating.com/privacy-statement/
             return true;
-        }
-        else if (id == R.id.contact_us){
+        } else if (id == R.id.contact_us) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:")); // only email apps should handle this
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@emeraldrating.com"});
@@ -395,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements
         String paymentTerms = object.getPaymentTerm();
         String paymentTermTolerance = object.getPaymentTermTolerance();
         String maxOrderSize = String.valueOf(object.getMaximumOrderSize());
-        String creditLimit = String.valueOf(((int)object.getCreditLimit()));
+        String creditLimit = String.valueOf(((int) object.getCreditLimit()));
         String average = object.getAverage();
 
         showDialog(riskClass,
